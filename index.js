@@ -21,7 +21,7 @@ app.post('/pull', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Selam Yunus Emre' });
+    res.json({ message: 'Selam Emre' });
 });
 
 app.listen(3000, "0.0.0.0", () => {
