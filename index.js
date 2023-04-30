@@ -36,7 +36,7 @@ app.post('/pull', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Hello World' });
+    res.json({ message: 'Hello World!' });
 });
 
 app.listen(3000, "0.0.0.0", () => {
