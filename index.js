@@ -15,8 +15,23 @@ app.post('/pull', (req, res) => {
     })
 
     gitPull.on('close', (code) => {
-        console.log(`child process exited with code ${code}`)
-        res.send(`Git pull finished with code ${code}`)
+        if (code === 0) {
+            const npmInstall = spawn('npm', ['install'])
+            npmInstall.stdout.on('data', (data) => {
+                console.log(`stdout: ${data}`)
+            })
+
+            npmInstall.stderr.on('data', (data) => {
+                console.error(`stderr: ${data}`)
+            })
+
+            npmInstall.on('close', (code) => {
+                console.log(`child process exited with code ${code}`)
+                res.send(`Git pull and npm install finished with code ${code}`)
+            })
+        } else {
+            res.send(`Git pull failed with code ${code}`)
+        }
     })
 })
 
